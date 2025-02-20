@@ -5,16 +5,17 @@ import { AuthService } from '../services/authService';
 export class AuthController {
   static async register(req: Request, res: Response): Promise<void> {
     try {
-      const { email, password, firstName, lastName } = req.body;
+      const { email, password, name, image_url ,gender} = req.body;
 
       // Register the user
-      const user = await AuthService.registerUser({ email, password, firstName, lastName });
+      const     { user, token } = await AuthService.registerUser({ email, password, name, image_url,gender });
 
       // Success response
-      res.status(201).json({
+      res.json({
         status: true,
         message: null,
         data: user,
+        token,
       });
     } catch (error) {
       // Handle the 'unknown' type error

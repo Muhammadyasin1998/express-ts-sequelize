@@ -1,42 +1,4 @@
-// import {
-//   Table,
-//   Column,
-//   Model,
-//   DataType,
-//   HasMany,
-// } from 'sequelize-typescript';
-// // import Product from './productModel';
 
-// @Table({
-//   tableName: 'users',
-//   timestamps: true,
-// })
-// class User extends Model {
-//   @Column({
-//     type: DataType.STRING,
-//     allowNull: false,
-//   })
-//   username!: string;
-
-//   @Column({
-//     type: DataType.STRING,
-//     allowNull: false,
-//     unique: true,
-//   })
-//   email!: string;
-
-//   @Column({
-//     type: DataType.STRING,
-//     allowNull: false,
-//   })
-//   password!: string;
-
-// //   @HasMany(() => Product)
-// //   products!: Product[];
-// }
-
-// export default User;
-// src/models/userModel.ts
 import {
   Table,
   Column,
@@ -51,10 +13,17 @@ import {
   DataType,
 } from 'sequelize-typescript';
 
+enum Gender {
+  Male = 'Male',
+  Female = 'Female',
+  Other = 'Other',
+}
+
 @Table({
   timestamps: true,
   tableName: 'users',
   paranoid: true,
+  
 })
 export default class User extends Model {
 
@@ -72,7 +41,12 @@ export default class User extends Model {
 
   @AllowNull(false)
   @Column(DataType.STRING)
+  
   name!: string;
-
-
+  
+  
+    @Column({
+    type: DataType.ENUM(...Object.values(Gender)),
+  })
+  gender!: Gender;
 }
