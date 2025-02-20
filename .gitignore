@@ -1,2 +1,4 @@
-
+.env
+*.json
+*.key
 rhsite-web-firebase-adminsdk-ds235-6b597b7ee3.json
